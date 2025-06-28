@@ -51,15 +51,20 @@ def get_blogger_credentials():
             print("❌ client_secret.json not found!")
             return None
     
-    # Convert credentials to JSON string
+    # Convert credentials to JSON string with safe attribute access
     creds_dict = {
-        'token': creds.token,
-        'refresh_token': creds.refresh_token,
-        'token_uri': creds.token_uri,
-        'client_id': creds.client_id,
-        'client_secret': creds.client_secret,
-        'scopes': creds.scopes
+        'token': getattr(creds, 'token', None),
+        'refresh_token': getattr(creds, 'refresh_token', None),
+        'token_uri': getattr(creds, 'token_uri', 'https://oauth2.googleapis.com/token'),
+        'client_id': getattr(creds, 'client_id', None),
+        'client_secret': getattr(creds, 'client_secret', None),
+        'scopes': getattr(creds, 'scopes', SCOPES)
     }
+    
+    # Validate required fields
+    if not creds_dict['token'] or not creds_dict['refresh_token']:
+        print("❌ Invalid credentials: missing token or refresh_token")
+        return None
     
     return json.dumps(creds_dict)
 
