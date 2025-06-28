@@ -1,0 +1,9 @@
+
+services:
+  - type: cron
+    name: blogger-auto-poster
+    env: python
+    schedule: "0 9 * * *"
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python main.py"
+    branch: main
