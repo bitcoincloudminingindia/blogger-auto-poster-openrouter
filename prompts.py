@@ -1,4 +1,4 @@
-prompts = [
+PROMPTS = [
     '''What is cloud mining and how does it benefit mobile users in 2025?''',
     '''Is it safe to mine Bitcoin using mobile cloud mining apps?''',
     '''How to start earning Bitcoin without any investment using Bitcoin Cloud Mining?''',
