@@ -43,15 +43,15 @@ def main():
     # Check environment variables before starting
     if not check_environment_variables():
         print("❌ Exiting due to missing environment variables.")
-        print("💡 Please set the required environment variables in Render dashboard:")
+        print("💡 Please set the required environment variables:")
         print("   - OPENROUTER_API_KEY")
         print("   - GEMINI_API_KEY") 
         print("   - BLOGGER_CREDENTIALS")
         return
     
-    # For Render cron jobs, run once and exit
-    if os.getenv('RENDER'):
-        print("🌐 Running on Render - executing job once...")
+    # For GitHub Actions or Render cron jobs, run once and exit
+    if os.getenv('GITHUB_ACTIONS') or os.getenv('RENDER'):
+        print("🌐 Running in automated environment - executing job once...")
         job()
         print("✅ Job completed successfully!")
         return
