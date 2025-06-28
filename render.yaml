@@ -1,9 +1,15 @@
-
 services:
   - type: cron
     name: blogger-auto-poster
     env: python
-    schedule: "0 9 * * *"
+    schedule: "0 9 * * *"  # Daily at 9:00 AM UTC
     buildCommand: "pip install -r requirements.txt"
     startCommand: "python main.py"
     branch: main
+    envVars:
+      - key: OPENROUTER_API_KEY
+        sync: false  # Set this in Render dashboard
+      - key: GEMINI_API_KEY
+        sync: false  # Set this in Render dashboard
+      - key: BLOGGER_CREDENTIALS
+        sync: false  # Set this in Render dashboard
